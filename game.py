@@ -3,14 +3,12 @@ import os
 import time
 #maybe graphical interface ?
 
-width=30
-height=10
-nbiter=10
+width=100
+height=20
+nbiter=100
+prob=0.5 #probability for new cell to appear
 #False : dead/no cell
 #True : alive cell
-
-#une cellule morte possédant exactement trois cellules voisines vivantes devient vivante (elle naît)
-#une cellule vivante possédant deux ou trois cellules voisines vivantes le reste, sinon elle meurt.
 
 def count_neighbors(x,y):
     k=0
@@ -38,7 +36,7 @@ def printSpace():
     print(s)
         
 def initSpace():
-    return [[True if random.random()<0.5 else False for _ in range(height)] for _ in range(width)]
+    return [[True if random.random()<prob else False for _ in range(height)] for _ in range(width)]
 
 space=initSpace()
 for _ in range(nbiter):
@@ -48,4 +46,4 @@ for _ in range(nbiter):
             updateCell(x, y)
     space=[[newSpace[i][j] for j in range(height)] for i in range(width)]
     printSpace()
-    time.sleep(1) #freeze for 1s to have time to see before clearing the terminal
+    time.sleep(0.1) #freeze to have time to see before clearing the terminal
